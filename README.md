@@ -3,7 +3,8 @@
 cluster-iperf is a docker image that runs the iperf IP network performance
 tool. The same image can be used to run iperf in client or server mode, and
 environment variables can be set, and command line arguments passed through,
-to further customize iperf's behavior as described below.
+to further customize iperf's behavior as described below. It is built on
+alpine linux so the image itself is very lightweight.
 
 ## Documentation
 
