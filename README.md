@@ -14,7 +14,7 @@ alpine linux so the image itself is very lightweight.
 * [Why](#why)
 * [Pre-release](#pre-release)
 * [Prerequisites](#prerequisites)
-* [Installation](#installation)
+* [Example use](#example-use)
 * [Configuration](#configuration)
 
 ### Why?
@@ -42,12 +42,39 @@ there is very little risk to running iperf other than bandwidth utilization.
 
 To build and run the image you need docker installed.
 
-### Installation
+### Example use
 
-Clone the repo and use the supplied makefile to build the image. Use the supplied
-kubernetes and ECS object definitions to install the image into a cluster. You
-can also pull the image at markbnj/cluster-iperf.
+[markbnj/cluster-iperf](https://hub.docker.com/r/markbnj/cluster-iperf/)
 
+1. Pull the image and run server...
+
+```
+$ docker pull markbnj/cluster-iperf:0.0.1
+$ docker run -it --name=iperf-server -e "ROLE=server" markbnj/cluster-iperf:0.0.1
+```
+
+2. Run client...
+
+```
+$ docker run -it --name=iperf-client -e "ROLE=client" -e "SERVER_ADDR=iperf-server" --link iperf-server:iperf-server markbnj/cluster-iperf:0.0.1
+```
+
+Or ...
+
+1. Build image and run server...
+
+```
+$ git clone git@github.com:Markbnj/cluster-iperf.git
+$ cd cluster-iperf
+$ make build
+$ make run-server
+```
+
+2. Run client...
+
+```
+$ make run-client
+```
 
 ### Configuration
 
