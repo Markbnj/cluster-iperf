@@ -104,7 +104,7 @@ started in the image before iperf is started. Defaults to `false`.
 
 Example:
 
-`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2' \
+`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2'
  -e "RSYSLOG_REMOTE_PORT=5002" cluster-iperf`
 
 Determines whether the rsyslog facility local0 will be sent to a remote server when the
@@ -117,7 +117,7 @@ to be set. Defaults to `false`.
 
 Example:
 
-`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2' \
+`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2'
  -e "RSYSLOG_REMOTE_PORT=5002" cluster-iperf`
 
 Determines the IP address of the remote syslog daemon to which report lines should be sent.
@@ -129,7 +129,7 @@ Required when RSYSLOG_REMOTE is set to `true`.
 
 Example:
 
-`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2' \
+`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2'
  -e "RSYSLOG_REMOTE_PORT=5002" cluster-iperf`
 
 Determines the port on the remote syslog daemon to which report lines should be sent.
