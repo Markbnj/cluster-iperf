@@ -1,0 +1,23 @@
+# Example replication controller for an iperf service.
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: iperf-server-controller
+spec:
+  replicas: 1
+  selector:
+    iperf: server
+  template:
+    metadata:
+      labels:
+        iperf: server
+    spec:
+      containers:
+      - name: iperf-server
+        image: markbnj/cluster-iperf:0.0.1
+        env:
+        - name: ROLE
+          value: server
+        ports:
+        - containerPort: 5001
+

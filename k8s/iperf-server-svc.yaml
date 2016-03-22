@@ -1,0 +1,11 @@
+# Example service front-end for an iperf service
+apiVersion: v1
+kind: Service
+metadata:
+  name: iperf-server
+spec:
+  ports:
+  - port: 5001
+    targetPort: 5001
+  selector:
+    iperf: server

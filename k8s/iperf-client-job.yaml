@@ -1,0 +1,26 @@
+# Example job definition for an iperf client session.
+apiVersion: v1
+kind: Job
+metadata:
+  name: iperf-client-job
+spec:
+  template:
+    metadata:
+      name: iperf-client
+    spec:
+      containers:
+      - name: iperf-client
+        image: markbnj/cluster-iperf:0.0.1
+        env:
+        - name: ROLE
+          value: client
+        - name: REMOTE_ADDR
+          value: iperf-server
+        - name: RSYSLOG
+          value: true
+        - name: RSYSLOG_REMOTE
+          value: true
+        - name: RSYSLOG_REMOTE_IP
+          value: **CHANGE THIS**
+        - name: RSYSLOG_REMOTE_PORT
+          value: **CHANGE THIS**
