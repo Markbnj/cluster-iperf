@@ -10,6 +10,7 @@ ADD run_iperf.sh /bin/
 ADD rsyslog.conf /bin/
 ADD 50-default.conf /bin/
 ADD 49-remote.conf /bin/
+ADD 49-remote-ls.conf /bin/
 
 RUN apk update &&\
  apk add bash &&\

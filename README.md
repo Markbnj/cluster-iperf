@@ -101,6 +101,19 @@ started in the image before iperf is started. Defaults to `false`.
 
 ----
 
+###### RSYSLOG_LOGSTASH=[true || *false]
+
+Example:
+
+`docker run -d -e "RSYSLOG=true" -e "RSYSLOG_REMOTE=true" -e 'RSYSLOG_REMOTE_IP=172.17.0.2'
+ -e "RSYSLOG_REMOTE_PORT=5002" -e "RSYSLOG_LOGSTASH=true" cluster-iperf`
+
+Output log messages in a logstash-friendly format when logging to a remote logging
+daemon. This setting allows the iperf container to log directly to logstash on
+port 5001.
+
+----
+
 ###### RSYSLOG_REMOTE=[true || *false]
 
 Example:

@@ -14,6 +14,7 @@ IFS=$'\n\t'
 #
 # Output reports to rsyslog instead of stdout
 # RSYSLOG = [true || *false]
+# RSYSLOG_LOGSTASH = [true || *false]
 # RSYSLOG_REMOTE = [true || *false]
 # RSYSLOG_REMOTE_IP = ip
 # RSYSLOG_REMOTE_PORT = port
@@ -31,10 +32,11 @@ IFS=$'\n\t'
 # initialize from environment
 role=${ROLE:-}
 role_arg=
-log_path=${LOG_PATH:-}
-server_addr=${SERVER_ADDR:-}
-rsyslog=${RSYSLOG:-}
-rsyslog_remote=${RSYSLOG_REMOTE:-}
+log_path=${LOG_PATH:-/var/log/iperf}
+server_addr=${SERVER_ADDR:-127.0.0.1}
+rsyslog=${RSYSLOG:-false}
+rsyslog_logstash=${RSYSLOG_LOGSTASH:-false}
+rsyslog_remote=${RSYSLOG_REMOTE:-false}
 rsyslog_remote_ip=${RSYSLOG_REMOTE_IP:-}
 rsyslog_remote_port=${RSYSLOG_REMOTE_PORT:-}
 
@@ -52,10 +54,7 @@ else
     exit 1
 fi
 
-# ensure reasonable logging defaults
-if [ -z "${log_path}" ]; then
-    log_path="/var/log/iperf"
-fi
+# ensure logging directory exists
 if [ ! -d "${log_path}" ]; then
     mkdir -p ${log_path}
 fi
@@ -69,15 +68,24 @@ if [ "${rsyslog}" = "true" ]; then
     sed -i"" -e "s:##LOG_PATH##:${log_path}:g" /bin/50-default.conf
     mv /bin/50-default.conf /etc/rsyslog.d/
     if [ "${rsyslog_remote}" = "true" ]; then
-        sed -i"" -e "s:##RSYSLOG_REMOTE_IP##:${rsyslog_remote_ip}:g" -e "s:##RSYSLOG_REMOTE_PORT##:${rsyslog_remote_port}:g" /bin/49-remote.conf
-        mv /bin/49-remote.conf /etc/rsyslog.d/
+        if [ "${rsyslog_logstash}" = "true" ]; then
+            sed -i"" -e "s:##RSYSLOG_REMOTE_IP##:${rsyslog_remote_ip}:g" -e "s:##RSYSLOG_REMOTE_PORT##:${rsyslog_remote_port}:g" /bin/49-remote-ls.conf
+            mv /bin/49-remote-ls.conf /etc/rsyslog.d/
+            rm /bin/49-remote.conf
+        else
+            sed -i"" -e "s:##RSYSLOG_REMOTE_IP##:${rsyslog_remote_ip}:g" -e "s:##RSYSLOG_REMOTE_PORT##:${rsyslog_remote_port}:g" /bin/49-remote.conf
+            mv /bin/49-remote.conf /etc/rsyslog.d/
+            rm /bin/49-remote-ls.conf
+        fi
     else
         rm /bin/49-remote.conf
+        rm /bin/49-remote-ls.conf
     fi
     /usr/sbin/rsyslogd
 else
     rm /bin/50-default.conf
     rm /bin/49-remote.conf
+    rm /bin/49-remote-ls.conf
 fi
 
 # start iperf
