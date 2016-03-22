@@ -1,0 +1,23 @@
+/** Sample ECS task definition for an iperf server
+*/
+{
+    "family": "",
+    "containerDefinitions": [
+        {
+            "name": "iperf-server",
+            "image": "markbnj/cluster-iperf:0.0.1",
+            "portMappings": [
+                {
+                    "containerPort": 5001,
+                    "hostPort": 5001
+                }
+            ],
+            "environment": [
+                {
+                    "name": "ROLE",
+                    "value": "server"
+                }
+            ]
+        }
+    ]
+}

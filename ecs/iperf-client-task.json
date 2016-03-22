@@ -1,0 +1,37 @@
+/** Sample ECS task definition for an iperf server
+*/
+{
+    "family": "",
+    "containerDefinitions": [
+        {
+            "name": "iperf-client",
+            "image": "markbnj/cluster-iperf:0.0.1",
+            "environment": [
+                {
+                    "name": "ROLE",
+                    "value": "client"
+                },
+                {
+                    "name": "SERVER_ADDR",
+                    "value": "**CHANGE THIS**"
+                },
+                {
+                    "name": "RSYSLOG",
+                    "value": true
+                },
+                {
+                    "name": "RSYSLOG_REMOTE",
+                    "value": true
+                },
+                {
+                    "name": "RSYSLOG_REMOTE_IP",
+                    "value": "**CHANGE THIS**"
+                },
+                {
+                    "name": "RSYSLOG_REMOTE_PORT",
+                    "value": "**CHANGE THIS**"
+                }
+            ]
+        }
+    ]
+}
