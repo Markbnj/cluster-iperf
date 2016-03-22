@@ -20,7 +20,7 @@ run-server: .rm-server
 	docker run -it -h $(SERVER_NAME) --name=$(SERVER_NAME) -p $(SERVER_PORT):$(SERVER_PORT) -e "ROLE=server" $(REGISTRY_NAME)/$(IMAGE_NAME):$(TAG)
 
 run-client: .rm-client
-	docker run -it -h $(CLIENT_NAME) --name=$(CLIENT_NAME) -e "ROLE=client" -e "REMOTE_ADDR=iperf-server" --link iperf-server:iperf-server $(REGISTRY_NAME)/$(IMAGE_NAME):$(TAG)
+	docker run -it -h $(CLIENT_NAME) --name=$(CLIENT_NAME) -e "ROLE=client" -e "SERVER_ADDR=iperf-server" --link iperf-server:iperf-server $(REGISTRY_NAME)/$(IMAGE_NAME):$(TAG)
 
 clean: .rm-client .rm-server
 	if (docker images | grep -q $(REGISTRY_NAME)/$(IMAGE_NAME)); then docker rmi $(REGISTRY_NAME)/$(IMAGE_NAME):$(TAG); fi

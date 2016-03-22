@@ -10,7 +10,7 @@ IFS=$'\n\t'
 # ROLE = [client || server]
 #
 # The remote IP of the server to connect to in client role
-# REMOTE_ADDR = [ip || host]
+# SERVER_ADDR = [ip || host]
 #
 # Output reports to rsyslog instead of stdout
 # RSYSLOG = [true || *false]
@@ -32,7 +32,7 @@ IFS=$'\n\t'
 role=${ROLE:-}
 role_arg=
 log_path=${LOG_PATH:-}
-remote_addr=${REMOTE_ADDR:-}
+server_addr=${SERVER_ADDR:-}
 rsyslog=${RSYSLOG:-}
 rsyslog_remote=${RSYSLOG_REMOTE:-}
 rsyslog_remote_ip=${RSYSLOG_REMOTE_IP:-}
@@ -40,12 +40,12 @@ rsyslog_remote_port=${RSYSLOG_REMOTE_PORT:-}
 
 # set up for running as the client or server
 if [ "${role}" = "client" ]; then
-    if [ -z "${remote_addr}" ]; then
-        remote_addr=127.0.0.1
+    if [ -z "${server_addr}" ]; then
+        server_addr=127.0.0.1
     fi
     role_arg="-c"
 elif [ "${role}" = "server" ]; then
-    remote_addr=
+    server_addr=
     role_arg="-s"
 else
     echo "Error: unknown ROLE: ${role}"
@@ -82,7 +82,7 @@ fi
 
 # start iperf
 if [ "${rsyslog}" = "true" ]; then
-    exec iperf ${role_arg} ${remote_addr} $@ | logger -t iperf -p local0.info
+    exec iperf ${role_arg} ${server_addr} $@ | logger -t iperf -p local0.info
 else
-    exec iperf ${role_arg} ${remote_addr} $@
+    exec iperf ${role_arg} ${server_addr} $@
 fi

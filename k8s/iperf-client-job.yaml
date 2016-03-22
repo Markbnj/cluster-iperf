@@ -14,7 +14,7 @@ spec:
         env:
         - name: ROLE
           value: client
-        - name: REMOTE_ADDR
+        - name: SERVER_ADDR
           value: iperf-server
         - name: RSYSLOG
           value: true

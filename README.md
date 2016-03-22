@@ -136,3 +136,14 @@ Example:
 Determines the port on the remote syslog daemon to which report lines should be sent.
 Required when RSYSLOG_REMOTE is set to `true`.
 
+----
+
+###### SERVER_ADDR=[ip || hostname]
+
+Example:
+
+`docker run -d -e "ROLE=client" -e "SERVER_ADDR=myserver" cluster-iperf`
+
+Determines the address of the iperf server to connect to when in the client
+role. Defaults to localhost (127.0.0.1).
+
