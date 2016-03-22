@@ -13,3 +13,13 @@ Files:
 Many other configurations are possible. For example the service could be changed
 to type nodePort and the test run from outside the cluster, or to type loadBalancer
 to run the test from an external client.
+
+Notes on the example:
+
+The server is set up to log to stdout for simplicity. The logs can be retrieved
+with `kubectl logs <pod name>` where `<pod name>` is the name of the pod running
+the server container.
+
+The client shows how to connect to a remote syslog daemon but could just as easily
+log to stdout, or to a local file (set RSYSLOG_REMOTE to `false`). If logging to
+a file that volume could be mounted onto the host and retrieved with scp, etc.
