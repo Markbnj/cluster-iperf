@@ -7,7 +7,7 @@ IFS=$'\n\t'
 # environment variables read on startup:
 #
 # Run in the client or server role
-# ROLE = [*client || server]
+# ROLE = [client || server]
 #
 # The remote IP of the server to connect to in client role
 # REMOTE_ADDR = [ip || host]
