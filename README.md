@@ -6,6 +6,8 @@ environment variables can be set, and command line arguments passed through,
 to further customize iperf's behavior as described below. It is built on
 alpine linux so the image itself is very lightweight.
 
+[docker pull markbnj/cluster-iperf:0.0.1](https://hub.docker.com/r/markbnj/cluster-iperf/)
+
 ## Documentation
 
 ### Table of Contents
