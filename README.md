@@ -44,7 +44,7 @@ To build and run the image you need docker installed.
 
 ### Example use
 
-[markbnj/cluster-iperf](https://hub.docker.com/r/markbnj/cluster-iperf/)
+Docker Hub: [markbnj/cluster-iperf](https://hub.docker.com/r/markbnj/cluster-iperf/)
 
 1. Pull the image and run server...
 
