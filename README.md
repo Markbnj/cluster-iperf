@@ -89,8 +89,8 @@ To set these or the custom environment variables in the image either use the -e
 argument to [docker run](https://docs.docker.com/engine/reference/run/), or the
 appropriate property of a kubernetes or ECS task/pod.
 
-Lastly, command line arguments can be passed to the entrypoint using the
---command argument to [docker run](https://docs.docker.com/engine/reference/run/),
+Lastly, command line arguments can be passed to the entrypoint by passing them as
+command arguments to [docker run](https://docs.docker.com/engine/reference/run/),
 and by using the appropriate property of a kubernetes or ECS pod/task to pass them.
 Any arguments passed in the CMD will be appended to the start up script command
 line and passed through to iperf at startup.
